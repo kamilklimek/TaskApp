@@ -16,30 +16,30 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/project">Projekty</a>
+                    <a class="nav-link" href="/project">Projects</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/logaut">Wyloguj się</a>
+                    <a class="nav-link" href="/logaut">Logout</a>
                 </li>
             </ul>
         </div>
     </nav>
 <div class="register-form">
 
-    <h1 class="register-form__title title">Tworzenie projektu</h1>
+    <h1 class="register-form__title title">Create project</h1>
     <form th:action="@{/project/create}" th:object="${project}" method="post">
         <div class="group">
             <div class="form-group">
-                <label>Nazwa: </label>
+                <label>Name: </label>
                 <input type="text" class="form-control" th:field="*{name}" placeholder="">
             </div> <!-- form-group end.// -->
         </div> <!-- form-row end.// -->
         <div class="form-group">
-            <label>Opis: </label>
+            <label>Description: </label>
             <input class="form-control" th:field="*{description}" type="text">
         </div>
         <div class="form-group">
-            <label>Hex color: </label>
+            <label>Color: </label>
             <input type="text" class="form-control" th:field="*{hexColor}" placeholder="">
             <small class="form-text text-muted">Choose color which will be used in project icons.</small>
         </div> <!-- form-group end.// -->

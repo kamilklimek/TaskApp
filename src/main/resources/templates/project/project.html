@@ -16,20 +16,20 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/project/create">Utwórz projekt</a>
+                <a class="nav-link" href="/project/create">Create project</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/project">Projekty</a>
+                <a class="nav-link" href="/project">Projects</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/logout">Wyloguj się</a>
+                <a class="nav-link" href="/logout">Logout</a>
             </li>
         </ul>
     </div>
 </nav>
 
 <div class="projects-container">
-    <h2 class="title">Projekt: <span th:text="${project.name}"/></h2>
+    <h2 class="title"><span class="dot"  th:style="@{background: } + ${project.hexColor}"></span>Project: <span th:text="${project.name}"></span></h2>
     <a th:href="@{/project/} + ${project.id} + @{/task/create}" class="btn btn-primary no-link margin-btn">Create task</a>
     <table class="table table-striped table-hover">
         <thead>
@@ -45,7 +45,7 @@
             <td th:text="${task.description}" style="width: 40%"/>
             <td th:text="${task.scheduleDate}" style="width:20%"/>
             <td style="width: 10%">
-                <a th:href="@{/project/} + ${project.id} + @{/task/} + ${task.id} + @{/edit}" class="btn btn-default no-link margin-btn">Edit</a>
+                <a th:href="@{/project/} + ${project.id} + @{/task/} + ${task.id} + @{/edit}" class="btn btn-primary no-link margin-btn">Edit</a>
                 <a th:href="@{/project/} + ${project.id} + @{/task/} + ${task.id} + @{/delete}" class="btn btn-danger no-link margin-btn">Delete</a>
             </td>
         </tr:block>
