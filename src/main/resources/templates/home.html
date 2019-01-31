@@ -14,13 +14,19 @@
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, architecto deserunt dignissimos excepturi impedit natus officia optio quidem reiciendis soluta. Ab autem ea eaque harum officia quia quis ratione reiciendis.
         </p>
     </div>
-    <div class="flex-container flex-center">
-        <a href="/login-in" class="btn btn-primary">
-            Sign in
-        </a>
-        <a href="/sign-up" class="btn btn-default">
-            Sign up
-        </a>
+    <div th:if="${logged}" style="width:100%; text-align: center;" class="flex-container flex-center">
+        Welcome,  <span th:text="${login}" />
+    </div>
+
+    <div th:unless="${logged}">
+        <div class="flex-container flex-center">
+            <a href="/login" class="btn btn-primary">
+                Sign in
+            </a>
+            <a href="/sign-up" class="btn btn-default">
+                Sign up
+            </a>
+        </div>
     </div>
 
     <ul class="flex-container app-benefits">
