@@ -2,6 +2,7 @@ package com.java.ee.task.controller;
 
 import com.java.ee.task.organizer.TaskFacade;
 import com.java.ee.task.organizer.entity.Task;
+import com.java.ee.task.organizer.exception.TaskValidationException;
 import com.java.ee.task.organizer.identity.TaskIdentity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -33,10 +34,45 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createTask(@PathVariable Long projectId, Principal principal, Task task) {
+    public String createTask(@PathVariable Long projectId, Principal principal, Task task, Model model) {
         final TaskIdentity taskIdentity = new TaskIdentity(principal.getName(), projectId);
 
-        taskFacade.addTask(taskIdentity, task);
+        try {
+            taskFacade.addTask(taskIdentity, task);
+        } catch (TaskValidationException e) {
+            log.error("Caught task validation exception while trying to create task: {}, for taskIdenity: {}, due to: {}", task, taskIdentity, e.getMessage());
+
+            model.addAttribute("errors", e.getMessage());
+            return "task/create";
+        }
+
+        return "redirect:/project/" + projectId;
+    }
+
+    @RequestMapping(value = "/{taskId}/edit", method = RequestMethod.GET)
+    public String getEditTaskView(Model model, @PathVariable Long projectId, @PathVariable Long taskId, Principal principal) {
+        final TaskIdentity taskIdentity = new TaskIdentity(principal.getName(), projectId, taskId);
+
+        Task task = taskFacade.getTask(taskIdentity);
+
+        model.addAttribute("task", task);
+        model.addAttribute("projectId", projectId);
+
+        return "task/edit";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String updateTask(Principal principal, Task task, @PathVariable Long projectId, Model model) {
+        final TaskIdentity taskIdentity = new TaskIdentity(principal.getName(), projectId, task.getId());
+
+        try {
+            taskFacade.updateTask(taskIdentity, task);
+        } catch (TaskValidationException e) {
+            log.error("Caught task validation exception while trying to edit task: {}, for taskIdenity: {}, due to: {}", task, taskIdentity, e.getMessage());
+
+            model.addAttribute("errors", e.getMessage());
+            return "task/edit";
+        }
 
         return "redirect:/project/" + projectId;
     }
@@ -45,7 +81,7 @@ public class TaskController {
     @RequestMapping(value = "/{taskId}/delete", method = RequestMethod.GET)
     public String getDeleteTaskView(Model model, @PathVariable Long taskId, @PathVariable Long projectId, Principal principal) {
         TaskIdentity taskIdentity = new TaskIdentity(principal.getName(), projectId, taskId);
-        Task task = taskFacade.getTaskId(taskIdentity);
+        Task task = taskFacade.getTask(taskIdentity);
 
         model.addAttribute("name", task.getName());
         model.addAttribute("id", taskId);

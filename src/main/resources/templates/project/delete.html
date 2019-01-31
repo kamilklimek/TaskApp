@@ -22,9 +22,6 @@
                 <a class="nav-link" href="/project">Projekty</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/profile">Profil</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/logout">Wyloguj się</a>
             </li>
         </ul>
@@ -34,7 +31,7 @@
 <div class="projects-container">
     <h2 class="title">Usuwanie projektu</h2>
     <p>Jesteś pewien, że chcesz usunąć <span th:text="${name}"/>?</p>
-    <a th:href="@{/project/} + ${id}" class="btn btn-default margin-btn">Nie</a>
+    <a th:href="@{/project}" class="btn btn-default margin-btn">Nie</a>
     <button  id="delete" class="btn btn-danger no-link margin-btn">Tak, chcę usunąć</button>
 </div>
 

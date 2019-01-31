@@ -33,4 +33,11 @@ public class Task {
                 ", scheduleDate=" + scheduleDate +
                 '}';
     }
+
+    public Task from(Task task) {
+        this.name = task.name;
+        this.description = task.description;
+        this.scheduleDate = task.scheduleDate;
+        return this;
+    }
 }

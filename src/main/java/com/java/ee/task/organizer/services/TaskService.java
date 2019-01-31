@@ -62,4 +62,21 @@ public class TaskService {
             return false;
         }
     }
+
+    public boolean isTaskNameHasChanged(TaskIdentity taskIdentity, Task task) {
+        try {
+            Task taskFromDB = getTask(taskIdentity);
+            return !taskFromDB.getName().equals(task.getName());
+        } catch (Exception e) {
+            return true;
+        }
+    }
+
+    public void updateTask(TaskIdentity taskIdentity, Task task) {
+        Task taskFromDb = getTask(taskIdentity);
+
+        taskFromDb = taskFromDb.from(task);
+
+        taskRepository.save(taskFromDb);
+    }
 }

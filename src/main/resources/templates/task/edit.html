@@ -17,7 +17,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/project/create">Utwórz projekt</a>
+                <a class="nav-link" href="/project/${projectId}/task/create">Utwórz zadanie</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="/project">Projekty</a>
@@ -28,10 +28,11 @@
         </ul>
     </div>
 </nav>
-
 <div class="register-form">
-    <h1 class="register-form__title title">Create task:</h1>
-    <form th:action="@{/project/} + ${projectId} + @{/task/create}" th:object="${task}" method="post">
+    <h1 class="register-form__title title">Edit task: <span th:text="${task.name}" /></h1>
+    <form th:action="@{/project/} + ${projectId} + @{/task/edit}" th:object="${task}" method="post">
+
+        <input type="hidden" th:field="*{id}" />
         <div class="group">
             <div class="form-group">
                 <label>Name: </label>
@@ -39,7 +40,7 @@
             </div> <!-- form-group end.// -->
         </div> <!-- form-row end.// -->
         <div class="form-group">
-            <label>Opis: </label>
+            <label>Description: </label>
             <input class="form-control" th:field="*{description}" type="text">
         </div>
         <div class="form-group">
@@ -52,7 +53,7 @@
         <div class="form-group text-danger" th:text="${errors}" />
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block"> Create </button>
+            <button type="submit" class="btn btn-primary btn-block"> Edit </button>
         </div> <!-- form-group// -->
     </form>
 </div>

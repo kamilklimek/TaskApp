@@ -40,7 +40,7 @@ public class TaskFacade {
     }
 
 
-    public Task getTaskId(TaskIdentity taskIdentity) {
+    public Task getTask(TaskIdentity taskIdentity) {
         log.info("Get task for task identity: {}", taskIdentity);
 
         validateTaskBelongsToUser(taskIdentity);
@@ -64,6 +64,14 @@ public class TaskFacade {
             log.error("Error while remove task for task identity: {}", taskIdentity);
             throw e;
         }
+    }
+
+    public void updateTask(TaskIdentity taskIdentity, Task task) {
+        taskValidationService.validate(taskIdentity, task);
+
+        validateTaskBelongsToUser(taskIdentity);
+
+        taskService.updateTask(taskIdentity, task);
     }
 
     private void validateTaskBelongsToUser(TaskIdentity taskIdentity) {

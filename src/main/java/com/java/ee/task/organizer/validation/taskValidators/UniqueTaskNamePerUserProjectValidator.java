@@ -17,6 +17,11 @@ public class UniqueTaskNamePerUserProjectValidator implements TaskValidator{
 
     @Override
     public List<String> validateTask(TaskIdentity taskIdentity, Task task) {
+        if (!taskService.isTaskNameHasChanged(taskIdentity, task)) {
+            return Collections.emptyList();
+        }
+
+
         if (taskService.isUserProjectHasAlreadyTaskName(taskIdentity, task)) {
             return Collections.singletonList("Task name " + task.getName() + " is already used.");
         }
