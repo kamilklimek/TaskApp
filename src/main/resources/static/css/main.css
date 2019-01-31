@@ -1,0 +1,68 @@
+.register-form {
+    width: 50%;
+    margin: 0 auto;
+    padding: 2em 0;
+    box-sizing: border-box;
+}
+
+.register-form__title {
+
+}
+
+.list {
+    list-style: none;
+    padding:0;
+    margin: 0;
+}
+
+.flex-container {
+    display: flex;
+}
+.flex-center {
+    justify-content: center;
+}
+
+.home-container-app {
+    width: 50%;
+    margin: 0 auto;
+    text-align:center;
+}
+
+.home-container__about {
+
+}
+
+.home-container {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 5em;
+    box-sizing: border-box;
+}
+
+.app-benefits {
+    padding:0;
+    margin: 2em 0;
+    list-style: none;
+    justify-content: space-between;
+}
+
+.app-benefits > * {
+    margin: 0 .5em;
+}
+
+.app-benefits img {
+    width: 100%;
+}
+
+.projects-container {
+    margin: 2em auto;
+    width: 80%;
+}
+.margin-btn {
+    margin: 1em 0;
+}
+
+.no-link {
+    text-decoration: none !important;
+    color: white !important;
+}

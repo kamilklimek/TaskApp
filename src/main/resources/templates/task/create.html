@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+<div class="register-form">
+    <h1 class="register-form__title title">Create task:</h1>
+    <form th:action="@{/project/} + ${projectId} + @{/task/create}" th:object="${task}" method="post">
+        <div class="group">
+            <div class="form-group">
+                <label>Name: </label>
+                <input type="text" class="form-control" th:field="*{name}" placeholder="">
+            </div> <!-- form-group end.// -->
+        </div> <!-- form-row end.// -->
+        <div class="form-group">
+            <label>Opis: </label>
+            <input class="form-control" th:field="*{description}" type="text">
+        </div>
+        <div class="form-group">
+            <label>Date: </label>
+            <input type="date" class="form-control" th:field="*{scheduleDate}" placeholder="">
+            <small class="form-text text-muted">Choose date when task should be executed.</small>
+        </div> <!-- form-group end.// -->
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block"> Create </button>
+        </div> <!-- form-group// -->
+    </form>
+</div>
+
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
