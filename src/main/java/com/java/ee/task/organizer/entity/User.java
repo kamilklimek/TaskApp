@@ -19,9 +19,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String login;
+    @Column(unique = true, nullable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
+    @Transient
+    private String repeatPassword;
     private Gender gender;
 
     @OneToMany(mappedBy = "user", targetEntity = Project.class)

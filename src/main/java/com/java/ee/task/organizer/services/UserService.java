@@ -41,6 +41,14 @@ public class UserService {
         return userRepository.save(user).getId();
     }
 
+    public boolean isUserExistByLogin(String login) {
+        return userRepository.existsByLogin(login);
+    }
+
+    public boolean isUserExistByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
     private void encodePassword(User user) {
         log.info("Encoding password for user: {}", user.getLogin());
 
